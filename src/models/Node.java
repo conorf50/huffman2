@@ -8,31 +8,31 @@ package models;
  * The modes are part of a Binary Search Tree
  */
 public class Node implements Comparable <Node>{
-	private Integer index;
-	private Character letter;
+	private Integer freq;
+	private Integer ch;
 	private Node leftPtr;
 	private Node rightPtr;
 	/**
-	 * @param index
-	 * @param letter
+	 * @param freq
+	 * @param integer
 	 */
-	public Node(Character letter, Integer index) {
+	public Node(Integer integer, Integer freq) {
 		super();
-		this.index = index;
-		this.letter = letter;
+		this.freq = freq;
+		this.ch = integer;
 		this.leftPtr = null;
 		this.rightPtr = null;
 	}
 	
-	public Character getLetter() {
-		return letter;
+	public Integer getLetter() {
+		return ch;
 	}
 
-	public Integer getIndex() {
-		return index;
+	public Integer getFreq() {
+		return freq;
 	}
 	public int compareTo(Node n){
-		return this.getLetter().compareTo(n.getLetter());
+		return this.getFreq().compareTo(n.getFreq());
 	}
 
 	public Node getLeftPtr() {

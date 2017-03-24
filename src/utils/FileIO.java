@@ -1,95 +1,65 @@
 package utils;
 
 import java.io.File;
+import models.Node;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 import java.util.HashMap;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Scanner;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
+
 
 import controllers.Main;
-import models.Node;
 
 public class FileIO {
 	private static File inputFile  = new File("string.txt");
-	private static File XMLFile  = new File("stringXML.xml");
 	HashMap<Character, Integer> charMap = new HashMap<Character, Integer>();
-	private int occurance = 1;
+	private static int occurance = 1;
 
-	@SuppressWarnings("unchecked")
-	public void readXML() throws Exception
-	{
-		ObjectInputStream is = null;
-		try
-		{
-			XStream xstream = new XStream(new DomDriver());
-			is = xstream.createObjectInputStream(new FileReader(XMLFile));
-			//parts = (ArrayList<T>) is.readObject();
-		}
-		finally
-		{
-			if (is != null)
-			{
-				is.close();
-			}
-		}
-	}
+	
+	public static char charParser() throws FileNotFoundException {
+		 
+		 String inputFile  = "AAaFBCCHDDD";
+		 HashMap<Character, Integer> charMap = new HashMap<Character, Integer>();
+		 Queue<Node> pQueue = new PriorityQueue<>();
 
-	public void writeToXML() throws Exception
-	{
-		ObjectOutputStream os = null;
-		try
-		{
-			XStream xstream = new XStream(new DomDriver());
-			os = xstream.createObjectOutputStream(new FileWriter(XMLFile));
-			os.writeObject(xstream);
-		}
-		finally
-		{
-			if (os != null)
-			{
-				os.close();
-			}
-		}
-	}
 
-	public void charParser()
-	{
-		try {
 			Scanner sc = new Scanner(inputFile);
 
 			while(sc.hasNextLine()){
-				Character ch = sc.findInLine(".").charAt(0);
-				
-				if(Main.isDEBUG()){
-					System.out.println(ch);
-
-				}
-				// Put this into a HashMap with value c and occurance of 1
-
-				charMap.put(ch, occurance);
-				// Check the occurance of a character
+				char ch = sc.findInLine(".").charAt(0);
 				if(charMap.containsKey(ch)){
 					
 					occurance++;
+					System.out.println(occurance);
 				}
+				else{
+					occurance = 1;
+				}
+					System.out.println(ch);			
+				// Put this into a HashMap with value c and occurance of 1
+				charMap.put(ch, occurance);
+				
+				// 	Print the nodes for debugging
+				System.out.println(charMap);
 
-
+				// Build nodes
+				Node nd  = new Node(charMap.get(ch), charMap.get(occurance));
+			//	System.out.print(nd);
+				// Put these nodes into a queue
+				
+				
 			}
 			sc.close();
-		} catch (FileNotFoundException e) {
+			
+			return 0;
 
-			e.printStackTrace();
-		}
+			
+	 }
 
 		
-	}
-
 	
 
 	public int getOccurance() {
