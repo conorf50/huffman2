@@ -5,68 +5,63 @@ import models.Node;
 import java.io.FileNotFoundException;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
 
-
-
 import controllers.Main;
 
 public class FileIO {
-	private static File inputFile  = new File("string.txt");
+	private static File inputFile = new File("string.txt");
 	HashMap<Character, Integer> charMap = new HashMap<Character, Integer>();
-	private static int occurance = 1;
+	private static int occurrence = 1;
 
-	
 	public static char charParser() throws FileNotFoundException {
-		 
-		 String inputFile  = "AAaFBCCHDDD";
-		 HashMap<Character, Integer> charMap = new HashMap<Character, Integer>();
-		 Queue<Node> pQueue = new PriorityQueue<>();
 
+		String inputFile = "AAaFBCCHDDD";
+		HashMap<Character, Integer> tally = new HashMap<Character, Integer>();
+		Queue<Node> pQueue = new PriorityQueue<>();
+		// char ch = ' ';
 
-			Scanner sc = new Scanner(inputFile);
+		Scanner sc = new Scanner(inputFile);
 
-			while(sc.hasNextLine()){
-				char ch = sc.findInLine(".").charAt(0);
-				if(charMap.containsKey(ch)){
-					
-					occurance++;
-					System.out.println(occurance);
-				}
-				else{
-					occurance = 1;
-				}
-					System.out.println(ch);			
-				// Put this into a HashMap with value c and occurance of 1
-				charMap.put(ch, occurance);
-				
-				// 	Print the nodes for debugging
-				System.out.println(charMap);
+		while (sc.hasNextLine()) {
 
-				// Build nodes
-				Node nd  = new Node(charMap.get(ch), charMap.get(occurance));
-			//	System.out.print(nd);
-				// Put these nodes into a queue
-				
-				
+			// scan the input for single characters
+			char ch = sc.findInLine(".").charAt(0);
+			if (tally.containsKey(ch)) {
+
+				occurrence++;
+				// System.out.println(occurrence);
+			} else {
+				occurrence = 1;
 			}
-			sc.close();
-			
-			return 0;
-
-			
-	 }
-
+			System.out.println(ch);
+			// Put this into a HashMap with value c and occurrence of 1
+			tally.put(ch, occurrence);
 		
-	
+		}
+		
+		sc.close();
+		 
+		for(Map.Entry <Character, Integer> entry : tally.entrySet()){
+			char c  = entry.getKey();
+			int f = entry.getValue();
+			
+			Node n = new Node(c,f);
+			//System.out.println(n.toString());
+			
+		}
+		return 0;
 
-	public int getOccurance() {
-		return occurance;
 	}
 
-	public void setOccurance(int occurance) {
-		this.occurance = occurance;
+	public int getOccurance() {
+		return occurrence;
+	}
+
+	public void setOccurance(int occurrence) {
+		this.occurrence = occurrence;
 	}
 }

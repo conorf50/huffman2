@@ -145,19 +145,19 @@ public class Tree<T extends Comparable<T>> {
 	}
 
 
-	// Written by Joe
-	void printPreOrder(Node root, String indent)
-	{
-		if(root == null)
-			return;
-		System.out.println(""+indent+root.getLetter());
-		if(root.getLeftPtr() != null){
-			printPreOrder(root.getLeftPtr(),indent+"   ");
-		}
-		if(root.getRightPtr() != null){
-			printPreOrder(root.getRightPtr(),indent+"   ");
-		}
-	}
+//	// Written by Joe
+//	void printPreOrder(Node root, String indent)
+//	{
+//		if(root == null)
+//			return;
+//		System.out.println(""+indent+root.getLetter());
+//		if(root.getLeftPtr() != null){
+//			printPreOrder(root.getLeftPtr(),indent+"   ");
+//		}
+//		if(root.getRightPtr() != null){
+//			printPreOrder(root.getRightPtr(),indent+"   ");
+//		}
+//	}
 
 
 

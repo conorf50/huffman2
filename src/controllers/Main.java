@@ -27,22 +27,17 @@ public class Main {
 		return DEBUG_FLAG;
 	}
 
-
-
-	
 	/**
 	 * @param args
 	 * @throws Exception 
 	 */
-	
-	
 	
 	public static void main(String[] args) throws Exception {
 		
 		FileIO files = new FileIO();
 		files.charParser();
 		Main mn = new Main();
-		Shell ui = ShellFactory.createConsoleShell("dict>", "Spanish to English dictionary - type ?list to show commands", mn);
+		Shell ui = ShellFactory.createConsoleShell("HFCode>", "\nHuffman encoder type ?list to show commands", mn);
 		ui.commandLoop();
 		
 	}
@@ -52,7 +47,7 @@ public class Main {
 	public void chooseFile ()
 	{
 		if(isDEBUG()){
-			System.out.println("debug");
+			//System.out.println (Node.toString());
 		}
 		System.out.print("File hardcoded into code");
 		
