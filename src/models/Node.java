@@ -29,7 +29,7 @@ public class Node implements Comparable <Node>{
 	@Override
 	// auto generated through Eclipse
 	public String toString() {
-		return "Node [occurrence=" + occurrence + ", ch=" + ch + ", leftPtr=" + leftPtr + ", rightPtr=" + rightPtr
+		return "Node [occurrence=" + occurrence + ",\n  ch=" + ch + ",\n  leftPtr=" + leftPtr + ", \n rightPtr=" + rightPtr
 				+ "]";
 	}
 
