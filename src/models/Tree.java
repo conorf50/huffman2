@@ -13,7 +13,7 @@ public class Tree<T extends Comparable<T>> {
 	private Node root;
 
 	public Tree(Node root) {
-		this.root = root;
+		this.setRoot(root);
 	}
 
 	// Node class set to null
@@ -31,9 +31,21 @@ public class Tree<T extends Comparable<T>> {
 		}
 	}
 	// build a Huffman tree based on the priority queue
-	public void buildTree(){
+	public static void buildTree(Node root){
 		
 		
+	}
+	/**
+	 * @return the root
+	 */
+	public Node getRoot() {
+		return root;
+	}
+	/**
+	 * @param root the root to set
+	 */
+	public void setRoot(Node root) {
+		this.root = root;
 	}
 
 

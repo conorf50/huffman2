@@ -16,7 +16,7 @@ import controllers.Main;
 
 public class FileIO {
 	// work in progress, code coming from part 2
-	private static File inputFile = new File("string.txt");
+	//private static File inputFile = new File("string.txt");
 	public static HashMap<Character, Integer> tally = new HashMap<Character, Integer>();
 	public static Queue<Node> pQueue = new PriorityQueue<>();
 
@@ -47,12 +47,10 @@ public class FileIO {
 			if (tally.containsKey(ch)) {
 				// increment occurance by 1
 				occurrence++;
-				// System.out.println(occurrence);
 			} else {
 				// set it to 1 just in case it changed for some reason
 				occurrence = 1;
 			}
-			//System.out.println(ch);
 			// Put this into a HashMap with value c and occurrence of 1
 			tally.put(ch, occurrence);
 			
@@ -64,9 +62,9 @@ public class FileIO {
 		 
 		for(Map.Entry <Character, Integer> entry : tally.entrySet()){
 			char c  = entry.getKey();
-			int f = entry.getValue();
+			int i = entry.getValue();
 			
-			Node n = new Node(c,f);
+			Node n = new Node(c,i);
 			//System.out.println(n.toString());
 			pQueue.add(n);
 			//System.out.println(pQueue.poll());
@@ -86,7 +84,7 @@ public class FileIO {
 		}
 
 	Node root=pQueue.poll();
-	Tree tree = new Tree(root);
+	Tree.buildTree(root);
 	System.out.println("Root = " +root);
 
 	}

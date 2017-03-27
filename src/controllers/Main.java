@@ -37,7 +37,7 @@ public class Main {
 		FileIO files = new FileIO();
 		files.charParser();
 		Main mn = new Main();
-		Shell ui = ShellFactory.createConsoleShell("HFCode>", "\nHuffman encoder type ?list to show commands", mn);
+		Shell ui = ShellFactory.createConsoleShell("HFCode>", "\nHuffman encoder: type ?list to show commands", mn);
 		ui.commandLoop();
 		
 	}
@@ -60,6 +60,18 @@ public class Main {
 	public void encode ()
 	{
 		System.out.println("Starting encode");
+		}
+	
+	@Command(description="View the occurences for each character")
+	public void viewTally ()
+	{
+		System.out.println("getTally - see FlieIO method");
+		}
+	
+	@Command(description="View the priorty queue")
+	public void viewPQueue ()
+	{
+		System.out.println("pQueue = ");
 		}
 	
 	@Command(description="Decode")
