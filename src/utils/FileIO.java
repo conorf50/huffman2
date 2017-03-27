@@ -21,7 +21,7 @@ public class FileIO {
 	public static Queue<Node> pQueue = new PriorityQueue<>();
 
 	
-	// a variable to keep track of the letter tally
+	// a variable integer to keep track of the letter tally
 	private static int occurrence = 1;
 
 	public static void charParser() throws FileNotFoundException {
