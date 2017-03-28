@@ -1,4 +1,6 @@
 package models;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Queue;
 
 import models.Node;
@@ -11,6 +13,7 @@ import utils.FileIO;
 
 public class Tree<T extends Comparable<T>> {
 	private Node root;
+	public Map <Character, String> mp  = new HashMap <Character, String>();
 
 	public Tree(Node root) {
 		this.setRoot(root);
@@ -30,12 +33,7 @@ public class Tree<T extends Comparable<T>> {
 			return false;
 		}
 	}
-	// build a Huffman tree based on the priority queue
-	public static void buildTree(Node root){
-		
-		
-	}
-	/**
+/*
 	 * @return the root
 	 */
 	public Node getRoot() {
@@ -48,8 +46,27 @@ public class Tree<T extends Comparable<T>> {
 		this.root = root;
 	}
 
+	
+	public void traverse(){
+		traverseR(root, " ");
+	}
 
+	private void traverseR(Node root, String prefix ){
+		
+			if (root.getLeftPtr() != null){
+				traverseR(root.getLeftPtr(), prefix +"0");
+			}
+			
 
+			if (root.getRightPtr() != null){
+				traverseR(root.getRightPtr(), prefix +"1");
+				
+			}
+			
+			if ((root.getLeftPtr() == null) && (root.getRightPtr() == null)){
+				mp.put(root.getCharacter(), prefix);
+			}
+	}
 	
 
 }

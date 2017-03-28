@@ -77,14 +77,14 @@ public class FileIO {
 		// poll removes the head of the queue, so that we can view it
 		Node c1 = pQueue.poll();
 		Node c2 = pQueue.poll();
-		Node c3 = new Node('-', c1.getOccurence()+c2.getOccurence());
+		Node c3 = new Node(' ', c1.getOccurence()+c2.getOccurence());
 		c3.setLeftPtr(c1);
 		c3.setRightPtr(c2);
 		pQueue.add(c3);
 		}
 
 	Node root=pQueue.poll();
-	Tree.buildTree(root);
+	Tree t  = new Tree(root);
 	System.out.println("Root = " +root);
 
 	}
