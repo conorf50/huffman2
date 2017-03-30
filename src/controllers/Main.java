@@ -5,6 +5,8 @@ package controllers;
 
 
 import models.Node;
+import models.Tree;
+
 import java.io.IOException;
 
 import asg.cliche.Command;
@@ -43,8 +45,8 @@ public class Main {
 	}
 
 	
-	@Command(description="Add a new entry")
-	public void chooseFile ()
+	@Command(description="Encode a new file")
+	public void chooseNewFile()
 	{
 		if(isDEBUG()){
 			//System.out.println (Node.toString());
@@ -56,11 +58,16 @@ public class Main {
 	
 	
 	
+	
+	
 	@Command(description="Encode a file")
 	public void encode ()
 	{
 		System.out.println("Starting encode");
 		}
+	
+	
+
 	
 	@Command(description="View the occurences for each character")
 	public void viewTally ()
@@ -74,12 +81,7 @@ public class Main {
 		System.out.println("pQueue = ");
 		}
 	
-	@Command(description="Decode")
-	public void decode ()
-	{
-		System.out.println("See Huffman part 2");
-		}
-
+	
 
 	
 	

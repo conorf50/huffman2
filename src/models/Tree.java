@@ -13,6 +13,8 @@ import utils.FileIO;
 
 public class Tree<T extends Comparable<T>> {
 	private Node root;
+	//  This HashMap stores the leaves, or the bottoms of the nodes. The Character is the letter and the String is
+	// the binary code obtained from traversing the tree
 	public Map <Character, String> mp  = new HashMap <Character, String>();
 
 	public Tree(Node root) {
@@ -66,6 +68,8 @@ public class Tree<T extends Comparable<T>> {
 			if ((root.getLeftPtr() == null) && (root.getRightPtr() == null)){
 				mp.put(root.getCharacter(), prefix);
 			}
+			
+			System.out.println(mp.toString());
 	}
 	
 
