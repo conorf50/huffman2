@@ -37,7 +37,7 @@ public class Node implements Comparable <Node>{
 		return occurrence;
 	}
 	public int compareTo(Node n){
-		return this.getOccurence().compareTo(n.getOccurence());
+		return occurrence.compareTo(n.getOccurence());
 	}
 
 	public Node getLeftPtr() {

@@ -1,5 +1,6 @@
 package models;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Queue;
 
@@ -15,7 +16,7 @@ public class Tree<T extends Comparable<T>> {
 	private Node root;
 	//  This HashMap stores the leaves, or the bottoms of the nodes. The Character is the letter and the String is
 	// the binary code obtained from traversing the tree
-	public Map <Character, String> mp  = new HashMap <Character, String>();
+	public static Map <Character, String> mp  = new HashMap <Character, String>();
 
 	public Tree(Node root) {
 		this.setRoot(root);
