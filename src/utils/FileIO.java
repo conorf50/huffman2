@@ -2,6 +2,8 @@ package utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+
 import models.Node;
 import models.Tree;
 
@@ -27,9 +29,9 @@ public class FileIO<T> implements Iterable<T> {
 	// a variable integer to keep track of the letter tally
 	private static int occurrence = 1;
 
-	public static void textParser(String encFileName) throws IOException {
+	public static void textParser(File encFile) throws IOException {
 
-		Scanner sc = new Scanner(encFileName);
+		Scanner sc = new Scanner(encFile);
 
 		while (sc.hasNextLine()) {
 
@@ -149,6 +151,36 @@ public class FileIO<T> implements Iterable<T> {
 
 	}
 
+	
+	
+	public static void binaryIn (File decFile){
+		
+		try{
+			File datFile = decFile;
+			
+			byte[] byteIn = new byte[(int) datFile.length()];
+			FileInputStream fileInStream = new FileInputStream(datFile);
+			fileInStream.read(byteIn);
+			fileInStream.close();
+			// %02x tells Java to format the string as hex
+			String firstMagicByte  = String.format("%02x", byteIn[0]);
+			System.out.println(firstMagicByte);
+			if(firstMagicByte!= "0c") {
+				System.err.println("Invalid identifier bit at start of file");
+				return;
+			}
+			
+			for (int i = 0; i<datFile.length();i++){
+			System.out.println("Decoded File =" + String.format("%02x", byteIn[i]));
+			}
+		}
+		catch (IOException e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	public int getOccurance() {
 		return occurrence;
 	}

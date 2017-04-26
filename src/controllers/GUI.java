@@ -14,6 +14,9 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import utils.FileIO;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import java.awt.Panel;
+import java.awt.FlowLayout;
 
 public class GUI {
 
@@ -30,6 +33,9 @@ public class GUI {
 
 	String encFileName = null;
 	String decFileName = null;
+	File encFile;
+	File decFile;
+
 
 	/**
 	 * Launch the application.
@@ -70,49 +76,59 @@ public class GUI {
 
 		// Start of encode section
 		JLabel lblChooseFileTo = new JLabel("Choose File to encode");
+		lblChooseFileTo.setBounds(10, 33, 106, 14);
 		lblChooseFileTo.setHorizontalAlignment(SwingConstants.LEFT);
-		lblChooseFileTo.setBounds(28, 9, 106, 14);
 		panel.add(lblChooseFileTo);
 
-		JButton btnOpenEncFile = new JButton("Open File");
+		JButton btnOpenEncFile = new JButton("Open and encode file");
+		btnOpenEncFile.setBounds(10, 58, 414, 23);
 		btnOpenEncFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser encodeFc = new JFileChooser();
-				encodeFc.setCurrentDirectory(new java.io.File("/"));
+				encodeFc.setCurrentDirectory(new java.io.File("C:/Users/"));
 				encodeFc.setDialogTitle("Choose File");
-				encodeFc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				FileNameExtensionFilter encFileFilter = new FileNameExtensionFilter("Text Files", "txt", "TXT");
-				encodeFc.addChoosableFileFilter((javax.swing.filechooser.FileFilter) encFileFilter);
-				encodeFc.setFileFilter(encFileFilter);
+				encodeFc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+//				FileNameExtensionFilter encFileFilter = new FileNameExtensionFilter("Text Files", "txt");
+//				encodeFc.addChoosableFileFilter((javax.swing.filechooser.FileFilter) encFileFilter);
+//				encodeFc.setFileFilter(encFileFilter);
 
 				encodeFc.showOpenDialog(null);
 				if (encodeFc.getSelectedFile() != null) {
-					File encFile = encodeFc.getSelectedFile();
-					encFileName = encFile.getAbsolutePath();
+					
+
+					//encFileName = encFile.getAbsolutePath();
 
 					JTextArea encFileText = new JTextArea();
 					encFileText.setBounds(143, 35, 281, 22);
 					panel.add(encFileText);
+					File encFile = encodeFc.getSelectedFile();
+
 					encFileText.setText(encFileName);
+					try {
+						FileIO.textParser(encFile);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 
 			}
 		});
-		btnOpenEncFile.setBounds(10, 33, 95, 23);
 		panel.add(btnOpenEncFile);
 
 		JLabel lblChooseFileToDecode = new JLabel("Choose file to decode");
-		lblChooseFileToDecode.setBounds(28, 140, 104, 14);
+		lblChooseFileToDecode.setBounds(12, 151, 104, 14);
 		panel.add(lblChooseFileToDecode);
 
-		JButton btnOpenDecFile = new JButton("Open file");
+		JButton btnOpenDecFile = new JButton("Open and decode file");
+		btnOpenDecFile.setBounds(10, 176, 414, 23);
 		btnOpenDecFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				JFileChooser decodeFc = new JFileChooser();
-				decodeFc.setCurrentDirectory(new java.io.File("/"));
+				decodeFc.setCurrentDirectory(new java.io.File(""));
 				decodeFc.setDialogTitle("Choose File");
-				decodeFc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				decodeFc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				decodeFc.showOpenDialog(null);
 
 				FileNameExtensionFilter decFileFilter = new FileNameExtensionFilter("DAT Files", "dat", "DAT");
@@ -120,49 +136,22 @@ public class GUI {
 				decodeFc.setFileFilter(decFileFilter);
 				if (decodeFc.getSelectedFile() != null) {
 					File decFile = decodeFc.getSelectedFile();
-					decFileName = decFile.getAbsolutePath();
+					decFileName = decFile.getName();
 
 					JTextArea decFileText = new JTextArea();
 					decFileText.setBounds(143, 177, 281, 22);
 					panel.add(decFileText);
 					decFileText.setText(decFileName);
+					
+					FileIO.binaryIn(decFile);
 				}
 
 			}
 		});
-		btnOpenDecFile.setBounds(10, 165, 95, 23);
 		panel.add(btnOpenDecFile);
-
-		JButton btnEncode = new JButton("Encode");
-		btnEncode.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				// call encode method with the filename as param
-				try {
-					FileIO.textParser(encFileName);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-
-			}
-		});
-		btnEncode.setBounds(10, 67, 414, 23);
-		panel.add(btnEncode);
-
-		JButton btnDecode = new JButton("Decode");
-		btnDecode.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// call decode method with filename as param
-
-			}
-		});
 		frmHuffmanEncoderdecoder.getContentPane().setLayout(null);
-		btnDecode.setBounds(10, 198, 414, 23);
-		panel.add(btnDecode);
 		frmHuffmanEncoderdecoder.getContentPane().add(panel);
 
+		
 	}
-
 }
