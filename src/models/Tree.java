@@ -63,7 +63,6 @@ public class Tree<T extends Comparable<T>> {
 
 			if (root.getRightPtr() != null){
 				traverseR(root.getRightPtr(), prefix +"1");
-				
 			}
 			
 			if ((root.getLeftPtr() == null) && (root.getRightPtr() == null)){

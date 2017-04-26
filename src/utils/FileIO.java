@@ -15,10 +15,9 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
 
-import controllers.Main;
+import controllers.GUI;
 
-public class FileIO<T> implements Iterable<T>{
-	// work in progress, code coming from part 2
+public class FileIO<T> implements Iterable<T> {
 	// private static File inputFile = new File("string.txt");
 	public static HashMap<Character, Integer> tally = new HashMap<Character, Integer>();
 	public static Queue<Node> pQueue = new PriorityQueue<>();
@@ -28,10 +27,9 @@ public class FileIO<T> implements Iterable<T>{
 	// a variable integer to keep track of the letter tally
 	private static int occurrence = 1;
 
-	public static void charParser() throws IOException {
+	public static void textParser(String encFileName) throws IOException {
 
-
-		Scanner sc = new Scanner(inputFile);
+		Scanner sc = new Scanner(encFileName);
 
 		while (sc.hasNextLine()) {
 
@@ -85,7 +83,7 @@ public class FileIO<T> implements Iterable<T>{
 		Tree<?> t = new Tree(root);
 		// System.out.println("Root = " +root);
 		t.traverse();
-		
+
 		for (int i = 0; i < inputFile.length(); i++) {
 			char c = inputFile.charAt(i);
 			codedOutput.append(t.mp.get(c));
@@ -96,19 +94,22 @@ public class FileIO<T> implements Iterable<T>{
 
 	}
 
-	private static void binaryOut(String binaryOutS) throws IOException{
+	private static void binaryOut(String binaryOutS) throws IOException {
 
 		try {
 			FileOutputStream fos = new FileOutputStream(new File("test.dat"));
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
-			byte[] magic = { (byte) 0x0c, (byte) 0xAD, (byte) 0xD0, (byte) 0x99 };
+			// specify and write out the 'magic' identifier bits to the byte 
+			// output stream
+			
+			byte[] magic = {(byte)0x0c,(byte)0xAD,(byte)0xD0,(byte)0x99};
 			bos.write(magic);
 
 			for (Map.Entry<Character, String> entry : Tree.mp.entrySet()) {
 				Character key = entry.getKey();
 				String value = entry.getValue();
-				System.out.println(key + value);
+				System.out.println(key+value);
 
 				byte[] bK = new byte[1];
 				bK[0] = (byte) key.charValue();
@@ -125,26 +126,24 @@ public class FileIO<T> implements Iterable<T>{
 						for (int k = 0; k < j - value.length(); k += 8) {
 							s += "0";
 						}
-						
-						}else{
-							s = value.substring(i, i+8);
-						
+
+					} else {
+						s = value.substring(i, i + 8);
+
 					}
-				
-				byte b = (byte) Integer.parseInt(s,2);
-				bK[0] = b;
-				bos.write(bK);
-						
-				
+
+					byte b = (byte) Integer.parseInt(s, 2);
+					bK[0] = b;
+					bos.write(bK);
+
 				}
 
 			}
-			
+
 			bos.writeTo(fos);
 			fos.close();
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -175,7 +174,6 @@ public class FileIO<T> implements Iterable<T>{
 	}
 
 	public Iterator iterator() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
